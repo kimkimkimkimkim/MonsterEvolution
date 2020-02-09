@@ -1,5 +1,8 @@
 ScriptsOnlyBuild:
   usedScripts:
+    Assembly-CSharp.dll:
+    - naichilab.RadarChartLineUGUI
+    - naichilab.RadarChartPolygonUGUI
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
@@ -12,18 +15,28 @@ ScriptsOnlyBuild:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.CanvasScaler
+    - UnityEngine.UI.ContentSizeFitter
     - UnityEngine.UI.GraphicRaycaster
+    - UnityEngine.UI.GridLayoutGroup
     - UnityEngine.UI.HorizontalLayoutGroup
     - UnityEngine.UI.Image
+    - UnityEngine.UI.Mask
+    - UnityEngine.UI.Outline
+    - UnityEngine.UI.Slider
+    - UnityEngine.UI.Text
   sceneClasses:
-    Assets/Scenes/SampleScene.unity:
+    Assets/Scenes/MainScene.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
       Script: {instanceID: 0}
     - Class: 20
       Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
     - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
@@ -32,16 +45,34 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9370}
     - Class: 114
+      Script: {instanceID: 9372}
+    - Class: 114
       Script: {instanceID: 9376}
     - Class: 114
       Script: {instanceID: 9382}
+    - Class: 114
+      Script: {instanceID: 9384}
     - Class: 114
       Script: {instanceID: 9386}
     - Class: 114
       Script: {instanceID: 9390}
     - Class: 114
+      Script: {instanceID: 9398}
+    - Class: 114
+      Script: {instanceID: 9402}
+    - Class: 114
+      Script: {instanceID: 9424}
+    - Class: 114
       Script: {instanceID: 9426}
+    - Class: 114
+      Script: {instanceID: 9428}
+    - Class: 114
+      Script: {instanceID: 12718}
+    - Class: 114
+      Script: {instanceID: 12724}
     - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -690,7 +721,19 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 19be36a09b1f168757813ee1139d7bf1
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: naichilab
+    className: RadarChartLineUGUI
+  - hash:
+      serializedVersion: 2
+      Hash: c84f464b877e87acfaf729745f1b4be5
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: naichilab
+    className: RadarChartPolygonUGUI
   platform: 9
   scenePathNames:
-  - Assets/Scenes/SampleScene.unity
+  - Assets/Scenes/MainScene.unity
   playerPath: /Volumes/KESU/Document/iosApp/MonsterEvolution
