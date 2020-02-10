@@ -1,6 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - CharacterAnimation
     - naichilab.RadarChartLineUGUI
     - naichilab.RadarChartPolygonUGUI
     UnityEditor.Graphs.dll:
@@ -67,9 +68,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9428}
     - Class: 114
-      Script: {instanceID: 12718}
+      Script: {instanceID: 9442}
     - Class: 114
-      Script: {instanceID: 12724}
+      Script: {instanceID: 10250}
+    - Class: 114
+      Script: {instanceID: 11880}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -313,6 +316,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: VerticalLayoutGroup
+  - hash:
+      serializedVersion: 2
+      Hash: c84f464b877e87acfaf729745f1b4be5
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: naichilab
+    className: RadarChartPolygonUGUI
   - hash:
       serializedVersion: 2
       Hash: 9e70ecf91466f07d9bd649be625cae52
@@ -681,6 +690,12 @@ ScriptsOnlyBuild:
     className: AudioTrack
   - hash:
       serializedVersion: 2
+      Hash: 19be36a09b1f168757813ee1139d7bf1
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: naichilab
+    className: RadarChartLineUGUI
+  - hash:
+      serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -723,16 +738,10 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   - hash:
       serializedVersion: 2
-      Hash: 19be36a09b1f168757813ee1139d7bf1
+      Hash: 2eff646568a005057aa5fecbc174732d
     assemblyName: Assembly-CSharp.dll
-    namespaceName: naichilab
-    className: RadarChartLineUGUI
-  - hash:
-      serializedVersion: 2
-      Hash: c84f464b877e87acfaf729745f1b4be5
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: naichilab
-    className: RadarChartPolygonUGUI
+    namespaceName: 
+    className: CharacterAnimation
   platform: 9
   scenePathNames:
   - Assets/Scenes/MainScene.unity
