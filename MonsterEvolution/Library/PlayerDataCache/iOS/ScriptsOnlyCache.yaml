@@ -2,8 +2,12 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - CharacterAnimation
+    - CoinAppear
+    - CoinManager
     - naichilab.RadarChartLineUGUI
     - naichilab.RadarChartPolygonUGUI
+    DOTween.dll:
+    - DG.Tweening.Core.DOTweenSettings
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
@@ -14,6 +18,7 @@ ScriptsOnlyBuild:
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
+    - UnityEngine.EventSystems.EventTrigger
     - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.ContentSizeFitter
@@ -50,6 +55,8 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9376}
     - Class: 114
+      Script: {instanceID: 9378}
+    - Class: 114
       Script: {instanceID: 9382}
     - Class: 114
       Script: {instanceID: 9384}
@@ -72,7 +79,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10250}
     - Class: 114
-      Script: {instanceID: 11880}
+      Script: {instanceID: 10430}
+    - Class: 114
+      Script: {instanceID: 12702}
+    - Class: 114
+      Script: {instanceID: 15346}
+    - Class: 114
+      Script: {instanceID: 15352}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -720,6 +733,12 @@ ScriptsOnlyBuild:
     className: TMP_ColorGradient
   - hash:
       serializedVersion: 2
+      Hash: 2eff646568a005057aa5fecbc174732d
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CharacterAnimation
+  - hash:
+      serializedVersion: 2
       Hash: 8649814970b42d345b89944b862453cc
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -738,10 +757,28 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   - hash:
       serializedVersion: 2
-      Hash: 2eff646568a005057aa5fecbc174732d
+      Hash: 704dcd31abc789439bc3f3cd10b58c2b
+    assemblyName: DOTween.dll
+    namespaceName: DG.Tweening.Core
+    className: DOTweenComponent
+  - hash:
+      serializedVersion: 2
+      Hash: 3043290b08d2ce331b80366f9694a5c5
+    assemblyName: DOTween.dll
+    namespaceName: DG.Tweening.Core
+    className: DOTweenSettings
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: CharacterAnimation
+    className: CoinManager
+  - hash:
+      serializedVersion: 2
+      Hash: 0b7f9370a0b429820f7c0c37250522fe
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CoinAppear
   platform: 9
   scenePathNames:
   - Assets/Scenes/MainScene.unity
