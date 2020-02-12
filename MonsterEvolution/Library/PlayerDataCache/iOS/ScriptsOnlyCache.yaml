@@ -4,6 +4,8 @@ ScriptsOnlyBuild:
     - CharacterAnimation
     - CoinAppear
     - CoinManager
+    - GetCoinValueTextManager
+    - TouchAreaManager
     - naichilab.RadarChartLineUGUI
     - naichilab.RadarChartPolygonUGUI
     DOTween.dll:
@@ -16,6 +18,9 @@ ScriptsOnlyBuild:
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.TestListCacheData
+    UnityEditor.UI.dll:
+    - UnityEditor.UI.ContentSizeFitterEditor
+    - UnityEditor.UI.TextEditor
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.EventTrigger
@@ -49,43 +54,47 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9370}
-    - Class: 114
-      Script: {instanceID: 9372}
-    - Class: 114
-      Script: {instanceID: 9376}
-    - Class: 114
-      Script: {instanceID: 9378}
-    - Class: 114
       Script: {instanceID: 9382}
     - Class: 114
       Script: {instanceID: 9384}
     - Class: 114
-      Script: {instanceID: 9386}
+      Script: {instanceID: 9388}
     - Class: 114
       Script: {instanceID: 9390}
+    - Class: 114
+      Script: {instanceID: 9394}
+    - Class: 114
+      Script: {instanceID: 9396}
     - Class: 114
       Script: {instanceID: 9398}
     - Class: 114
       Script: {instanceID: 9402}
     - Class: 114
-      Script: {instanceID: 9424}
+      Script: {instanceID: 9410}
     - Class: 114
-      Script: {instanceID: 9426}
+      Script: {instanceID: 9414}
     - Class: 114
-      Script: {instanceID: 9428}
+      Script: {instanceID: 9436}
     - Class: 114
-      Script: {instanceID: 9442}
+      Script: {instanceID: 9438}
     - Class: 114
-      Script: {instanceID: 10250}
+      Script: {instanceID: 9440}
     - Class: 114
-      Script: {instanceID: 10430}
+      Script: {instanceID: 9454}
     - Class: 114
-      Script: {instanceID: 12702}
+      Script: {instanceID: 9910}
     - Class: 114
-      Script: {instanceID: 15346}
+      Script: {instanceID: 10032}
     - Class: 114
-      Script: {instanceID: 15352}
+      Script: {instanceID: 10284}
+    - Class: 114
+      Script: {instanceID: 10398}
+    - Class: 114
+      Script: {instanceID: 10466}
+    - Class: 114
+      Script: {instanceID: 11988}
+    - Class: 114
+      Script: {instanceID: 30358}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -613,10 +622,28 @@ ScriptsOnlyBuild:
     className: TMP_SpriteAnimator
   - hash:
       serializedVersion: 2
+      Hash: 704dcd31abc789439bc3f3cd10b58c2b
+    assemblyName: DOTween.dll
+    namespaceName: DG.Tweening.Core
+    className: DOTweenComponent
+  - hash:
+      serializedVersion: 2
+      Hash: 3043290b08d2ce331b80366f9694a5c5
+    assemblyName: DOTween.dll
+    namespaceName: DG.Tweening.Core
+    className: DOTweenSettings
+  - hash:
+      serializedVersion: 2
       Hash: 4fd8bf02e3089425d3502e26c44ba31a
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TextContainer
+  - hash:
+      serializedVersion: 2
+      Hash: 0b7f9370a0b429820f7c0c37250522fe
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CoinAppear
   - hash:
       serializedVersion: 2
       Hash: 3f8d7b92a6be3c715e55d5cfa7cc8384
@@ -721,6 +748,12 @@ ScriptsOnlyBuild:
     className: TMP_StyleSheet
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CoinManager
+  - hash:
+      serializedVersion: 2
       Hash: 5372ed2ce39229b1ac910757999a8be2
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -757,28 +790,16 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   - hash:
       serializedVersion: 2
-      Hash: 704dcd31abc789439bc3f3cd10b58c2b
-    assemblyName: DOTween.dll
-    namespaceName: DG.Tweening.Core
-    className: DOTweenComponent
-  - hash:
-      serializedVersion: 2
-      Hash: 3043290b08d2ce331b80366f9694a5c5
-    assemblyName: DOTween.dll
-    namespaceName: DG.Tweening.Core
-    className: DOTweenSettings
+      Hash: 9ef0c76fa26cd3ebfe3762f59e824c02
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TouchAreaManager
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: CoinManager
-  - hash:
-      serializedVersion: 2
-      Hash: 0b7f9370a0b429820f7c0c37250522fe
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: CoinAppear
+    className: GetCoinValueTextManager
   platform: 9
   scenePathNames:
   - Assets/Scenes/MainScene.unity

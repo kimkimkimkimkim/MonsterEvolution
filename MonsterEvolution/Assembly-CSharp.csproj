@@ -67,6 +67,8 @@
      <Compile Include="Assets\Scripts\Coin\CoinManager.cs" />
      <Compile Include="Assets\Scripts\RaderChart\RadarChartLineUGUI.cs" />
      <Compile Include="Assets\Scripts\RaderChart\RadarChartPolygonUGUI.cs" />
+     <Compile Include="Assets\Scripts\TouchArea\GetCoinValueTextManager.cs" />
+     <Compile Include="Assets\Scripts\TouchArea\TouchAreaManager.cs" />
      <None Include="Assets\Demigiant\DOTween\readme.txt" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>/Volumes/KESU/Document/GitHub/MonsterEvolution/MonsterEvolution/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
@@ -263,6 +265,9 @@
  <Reference Include="nunit.framework">
  <HintPath>/Applications/Unity/Hub/Editor/2019.1.10f1/Unity.app/Contents/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
  </Reference>
+ <Reference Include="DOTween">
+ <HintPath>/Volumes/KESU/Document/GitHub/MonsterEvolution/MonsterEvolution/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
+ </Reference>
  <Reference Include="Unity.Analytics.Editor">
  <HintPath>/Volumes/KESU/Document/GitHub/MonsterEvolution/MonsterEvolution/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Editor.dll</HintPath>
  </Reference>
@@ -271,9 +276,6 @@
  </Reference>
  <Reference Include="Unity.Analytics.Tracker">
  <HintPath>/Volumes/KESU/Document/GitHub/MonsterEvolution/MonsterEvolution/Library/PackageCache/com.unity.analytics@3.3.2/Unity.Analytics.Tracker.dll</HintPath>
- </Reference>
- <Reference Include="DOTween">
- <HintPath>/Volumes/KESU/Document/GitHub/MonsterEvolution/MonsterEvolution/Assets/Demigiant/DOTween/DOTween.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>/Applications/Unity/Hub/Editor/2019.1.10f1/Unity.app/Contents/NetStandard/ref/2.0.0/netstandard.dll</HintPath>

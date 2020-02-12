@@ -64,7 +64,6 @@ public class CoinAppear : MonoBehaviour
 
     //コインを出現させる
     void Appear(){
-        Vector3 pos = new Vector3(0,0,0);
         GameObject coin = (GameObject)Instantiate(coinPrefab);
         coin.transform.SetParent(coinArea.transform,false);
         coin.transform.localScale = new Vector3(1,1,1);
