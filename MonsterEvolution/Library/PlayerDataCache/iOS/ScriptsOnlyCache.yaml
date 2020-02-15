@@ -1,11 +1,16 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - ButtonManager
     - CharacterAnimation
     - CoinAppear
     - CoinManager
-    - GetCoinValueTextManager
+    - Fade
+    - FadeImage
+    - GameManager
+    - SceneChangeManager
     - TouchAreaManager
+    - UpdateUI
     - naichilab.RadarChartLineUGUI
     - naichilab.RadarChartPolygonUGUI
     DOTween.dll:
@@ -18,9 +23,6 @@ ScriptsOnlyBuild:
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.TestListCacheData
-    UnityEditor.UI.dll:
-    - UnityEditor.UI.ContentSizeFitterEditor
-    - UnityEditor.UI.TextEditor
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.EventTrigger
@@ -36,6 +38,21 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Slider
     - UnityEngine.UI.Text
   sceneClasses:
+    Assets/Scenes/GachaScene.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
     Assets/Scenes/MainScene.unity:
     - Class: 1
       Script: {instanceID: 0}
@@ -54,47 +71,59 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 9382}
+      Script: {instanceID: 9318}
     - Class: 114
-      Script: {instanceID: 9384}
+      Script: {instanceID: 9344}
     - Class: 114
-      Script: {instanceID: 9388}
-    - Class: 114
-      Script: {instanceID: 9390}
+      Script: {instanceID: 9392}
     - Class: 114
       Script: {instanceID: 9394}
     - Class: 114
-      Script: {instanceID: 9396}
-    - Class: 114
       Script: {instanceID: 9398}
     - Class: 114
-      Script: {instanceID: 9402}
+      Script: {instanceID: 9400}
     - Class: 114
-      Script: {instanceID: 9410}
+      Script: {instanceID: 9404}
     - Class: 114
-      Script: {instanceID: 9414}
+      Script: {instanceID: 9406}
     - Class: 114
-      Script: {instanceID: 9436}
+      Script: {instanceID: 9408}
     - Class: 114
-      Script: {instanceID: 9438}
+      Script: {instanceID: 9412}
     - Class: 114
-      Script: {instanceID: 9440}
+      Script: {instanceID: 9420}
     - Class: 114
-      Script: {instanceID: 9454}
+      Script: {instanceID: 9424}
     - Class: 114
-      Script: {instanceID: 9910}
+      Script: {instanceID: 9446}
     - Class: 114
-      Script: {instanceID: 10032}
+      Script: {instanceID: 9448}
     - Class: 114
-      Script: {instanceID: 10284}
+      Script: {instanceID: 9450}
     - Class: 114
-      Script: {instanceID: 10398}
+      Script: {instanceID: 9464}
     - Class: 114
-      Script: {instanceID: 10466}
+      Script: {instanceID: 9646}
     - Class: 114
-      Script: {instanceID: 11988}
+      Script: {instanceID: 9838}
     - Class: 114
-      Script: {instanceID: 30358}
+      Script: {instanceID: 9938}
+    - Class: 114
+      Script: {instanceID: 9978}
+    - Class: 114
+      Script: {instanceID: 10066}
+    - Class: 114
+      Script: {instanceID: 10156}
+    - Class: 114
+      Script: {instanceID: 10320}
+    - Class: 114
+      Script: {instanceID: 10434}
+    - Class: 114
+      Script: {instanceID: 10502}
+    - Class: 114
+      Script: {instanceID: 10504}
+    - Class: 114
+      Script: {instanceID: 12132}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -130,6 +159,12 @@ ScriptsOnlyBuild:
     className: TMP_Dropdown
   - hash:
       serializedVersion: 2
+      Hash: 9d1dbf73dcf87a5bd00d17496f0d2f36
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ButtonManager
+  - hash:
+      serializedVersion: 2
       Hash: e7a73f5f78ba6445195ec23b74a1ce2d
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -140,6 +175,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: GroupTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Fade
   - hash:
       serializedVersion: 2
       Hash: a5781dc71a671b1ad2b38de19f24b71f
@@ -550,10 +591,22 @@ ScriptsOnlyBuild:
     className: SignalAsset
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: FadeSample
+  - hash:
+      serializedVersion: 2
       Hash: f08a111e17bb701f9c9ec57bb78d9920
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: AnimationTrack
+  - hash:
+      serializedVersion: 2
+      Hash: e0767445e47f5c7d53213b7e4d0cd80c
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: UpdateUI
   - hash:
       serializedVersion: 2
       Hash: 00274a21279f5cb831ce20f895049e38
@@ -566,6 +619,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: AnimationPlayableAsset
+  - hash:
+      serializedVersion: 2
+      Hash: c22c22ae27add8b82afa3a2aa40039cf
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: FadeUI
   - hash:
       serializedVersion: 2
       Hash: 303ad70ce203ad874efe2965d0fbcff9
@@ -596,6 +655,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: ControlTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameManager
   - hash:
       serializedVersion: 2
       Hash: b3ab2106268377ffe25dd18ac23dca28
@@ -638,6 +703,18 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TextContainer
+  - hash:
+      serializedVersion: 2
+      Hash: 11a7fcf5335e8c4857ac112ae0f5347e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: FadeManager
+  - hash:
+      serializedVersion: 2
+      Hash: a057d8bb92b1425de5f13dee38b90a35
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: FadeImage
   - hash:
       serializedVersion: 2
       Hash: 0b7f9370a0b429820f7c0c37250522fe
@@ -712,6 +789,12 @@ ScriptsOnlyBuild:
     className: TimelineAsset
   - hash:
       serializedVersion: 2
+      Hash: 943d574c1d1e54d79cbc2da86f3861b8
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SceneChangeManager
+  - hash:
+      serializedVersion: 2
       Hash: ee0cef6caaac8ae485bfa82f000f0f7b
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -772,6 +855,12 @@ ScriptsOnlyBuild:
     className: CharacterAnimation
   - hash:
       serializedVersion: 2
+      Hash: af35ef2dbe1ec87e3210b110b8576ba0
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TouchAreaManager
+  - hash:
+      serializedVersion: 2
       Hash: 8649814970b42d345b89944b862453cc
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
@@ -788,19 +877,8 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 9ef0c76fa26cd3ebfe3762f59e824c02
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: TouchAreaManager
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: GetCoinValueTextManager
   platform: 9
   scenePathNames:
   - Assets/Scenes/MainScene.unity
+  - Assets/Scenes/GachaScene.unity
   playerPath: /Volumes/KESU/Document/iosApp/MonsterEvolution

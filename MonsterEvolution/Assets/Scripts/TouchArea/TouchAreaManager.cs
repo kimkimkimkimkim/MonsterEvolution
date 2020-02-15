@@ -7,6 +7,7 @@ using DG.Tweening;
 public class TouchAreaManager : MonoBehaviour
 {
     //オブジェクト参照
+    public GameObject gameManager;
     public GameObject coinPrefab;
     public GameObject textPrefab;
 
@@ -27,6 +28,14 @@ public class TouchAreaManager : MonoBehaviour
     }
 
     public void GetCoin(){
+        int possessedCoin = SaveData.GetInt(SaveDataKeys.possessedCoin,DefaultValues.POSSESSED_COIN);
+        int coinValue = SaveData.GetInt(SaveDataKeys.coinValue,DefaultValues.COIN_VALUE);
+        possessedCoin += coinValue;
+        SaveData.SetInt(SaveDataKeys.possessedCoin,possessedCoin);
+        SaveData.Save();
+        gameManager.GetComponent<UpdateUI>().UpdatePossessedCoinText(possessedCoin);
+
+
         //Coin
         GameObject coin = (GameObject)Instantiate(coinPrefab);
         coin.GetComponent<Image>().raycastTarget = false;
@@ -59,13 +68,5 @@ public class TouchAreaManager : MonoBehaviour
                 new Vector3(textPos.x, textPos.y + 5,0),
                 time)
             .OnComplete(() => Destroy(text));
-                /*
-        DOTween
-            .ToAlpha(
-                () => text.GetComponent<Text>().color,
-                color => text.GetComponent<Text>().color = color,
-                0f,
-                time)
-            .SetEase(Ease.InExpo);*/
     }
 }
