@@ -8,6 +8,7 @@ ScriptsOnlyBuild:
     - Fade
     - FadeImage
     - GameManager
+    - LotteryMachineManager
     - SceneChangeManager
     - TouchAreaManager
     - UpdateUI
@@ -123,7 +124,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10504}
     - Class: 114
-      Script: {instanceID: 12132}
+      Script: {instanceID: 12146}
+    - Class: 114
+      Script: {instanceID: 12298}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -877,6 +880,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 64af62055050d04ae7c9836cc7910baf
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: LotteryMachineManager
   platform: 9
   scenePathNames:
   - Assets/Scenes/MainScene.unity

@@ -74,6 +74,7 @@
      <Compile Include="Assets\Scripts\Coin\CoinManager.cs" />
      <Compile Include="Assets\Scripts\GameManager\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameManager\UpdateUI.cs" />
+     <Compile Include="Assets\Scripts\LotteryMachine\LotteryMachineManager.cs" />
      <Compile Include="Assets\Scripts\RaderChart\RadarChartLineUGUI.cs" />
      <Compile Include="Assets\Scripts\RaderChart\RadarChartPolygonUGUI.cs" />
      <Compile Include="Assets\Scripts\SaveData\DefaultValues.cs" />

@@ -18,7 +18,6 @@ public class ButtonManager : MonoBehaviour
     {
         scale = this.transform.localScale.y;
         childRect = this.transform.GetChild(0).gameObject.GetComponent<RectTransform>();
-        Debug.Log(scale);
 
         //eventtriggerがアタッチされてなければアタッチする
         if(this.GetComponent<EventTrigger>() == null){
