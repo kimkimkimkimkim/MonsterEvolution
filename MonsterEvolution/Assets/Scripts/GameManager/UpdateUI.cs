@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class UpdateUI : MonoBehaviour
 {
     //オブジェクト参照
-    public GameObject textPossessedCoin;
+    public List<GameObject> textPossessedCoinList;
 
     public void UpdatePossessedCoinText(int possessedCoin){
-        textPossessedCoin.GetComponent<Text>().text = possessedCoin.ToString();
+        textPossessedCoinList.ForEach(t => {
+            t.GetComponent<Text>().text = possessedCoin.ToString();
+        });
     }
 }
