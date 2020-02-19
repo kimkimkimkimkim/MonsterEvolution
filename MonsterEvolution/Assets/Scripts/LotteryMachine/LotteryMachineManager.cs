@@ -9,6 +9,8 @@ public class LotteryMachineManager : MonoBehaviour
     public GameObject camera;
     public GameObject body;
     public GameObject handle;
+    public GameObject gameManager;
+    public GameObject gachaBallPrefab;
 
     //変数宣言
     Vector3 center;
@@ -22,15 +24,25 @@ public class LotteryMachineManager : MonoBehaviour
     float nowDiffAngle;
     float prevAngle;
 
+    bool enoughCost = false; //ガチャの費用が足りているかどうか
+    int gachaCost = 10;
+
     void Start()
     {
         center = transform.localPosition;
         oneRotationBaseAngle = body.transform.localEulerAngles.z;
     }
 
+    void OnEnable(){
+        enoughCost = SaveData.GetInt(SaveDataKeys.possessedCoin,DefaultValues.POSSESSED_COIN) >= gachaCost;
+    }
+
     // Update is called once per frame
     void Update()
     {  
+        //所持金が足りなかったら回せない
+        if(!enoughCost) return;
+
         if(Input.GetMouseButtonDown(0)){
             //クリックした時
             //最初の座標を取得
@@ -77,7 +89,21 @@ public class LotteryMachineManager : MonoBehaviour
     }
 
     public void OneRotation(){
-        Debug.Log("1回転");
+        GachaAnimation();
+        int coin = SaveData.GetInt(SaveDataKeys.possessedCoin,DefaultValues.POSSESSED_COIN);
+        enoughCost = coin - gachaCost >= gachaCost;
+        SaveData.SetInt(SaveDataKeys.possessedCoin,coin-gachaCost);
+        SaveData.Save();
+        gameManager.GetComponent<UpdateUI>().UpdatePossessedCoinText(coin - gachaCost);
+    }
+
+    void GachaAnimation(){
+        GameObject gachaBall = (GameObject)Instantiate(gachaBallPrefab);
+        gachaBall.transform.localScale = new Vector3(1,1,1);
+        gachaBall.transform.SetParent(this.transform,false);
+        gachaBall.transform.SetSiblingIndex(0); 
+        gachaBall.transform.localPosition = new Vector3(15.5f,2.4f,0);
+        gachaBall.GetComponent<Rigidbody2D>().AddForce(new Vector3(40,0,0));
     }
 
     public float GetAngle(Vector3 p1, Vector3 p2) {
