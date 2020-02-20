@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LotteryMachineManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class LotteryMachineManager : MonoBehaviour
     public GameObject handle;
     public GameObject gameManager;
     public GameObject gachaBallPrefab;
+    public List<Sprite> gachaBallSpriteList;
+    public GameObject gachaListParent;
 
     //変数宣言
     Vector3 center;
@@ -23,18 +26,21 @@ public class LotteryMachineManager : MonoBehaviour
     float prevDiffAngle;
     float nowDiffAngle;
     float prevAngle;
-
+    List<int> itemCountList = new List<int>{0,0,0,0,0,0};
     bool enoughCost = false; //ガチャの費用が足りているかどうか
-    int gachaCost = 10;
+    int gachaCost = 1;
 
     void Start()
     {
         center = transform.localPosition;
         oneRotationBaseAngle = body.transform.localEulerAngles.z;
+        UpdateItemCountText(itemCountList);
     }
 
     void OnEnable(){
         enoughCost = SaveData.GetInt(SaveDataKeys.possessedCoin,DefaultValues.POSSESSED_COIN) >= gachaCost;
+        itemCountList = new List<int>{0,0,0,0,0,0};
+        UpdateItemCountText(itemCountList);
     }
 
     // Update is called once per frame
@@ -88,22 +94,83 @@ public class LotteryMachineManager : MonoBehaviour
         }
     }
 
+    //ガチャ
     public void OneRotation(){
-        GachaAnimation();
+        //何が出るか決める
+        List<float> probabilityList = new List<float>{
+            50.0f,
+            10.0f,
+            10.0f,
+            10.0f,
+            10.0f,
+            10.0f
+        };
+        int gachaItemNum = DecideGachaItemNum(probabilityList);
+        //アイテムの個数反映
+        itemCountList[gachaItemNum]++;
+        UpdateItemCountText(itemCountList);
+        //アニメーション
+        GameObject gachaBall = (GameObject)Instantiate(gachaBallPrefab);
+        gachaBall.GetComponent<Image>().sprite = gachaBallSpriteList[gachaItemNum];
+        GachaAnimation(gachaBall);
+        //お金
         int coin = SaveData.GetInt(SaveDataKeys.possessedCoin,DefaultValues.POSSESSED_COIN);
         enoughCost = coin - gachaCost >= gachaCost;
         SaveData.SetInt(SaveDataKeys.possessedCoin,coin-gachaCost);
         SaveData.Save();
         gameManager.GetComponent<UpdateUI>().UpdatePossessedCoinText(coin - gachaCost);
+        //ゲットしたアイテムの反映
+        GetGachaItem(gachaItemNum);
     }
 
-    void GachaAnimation(){
-        GameObject gachaBall = (GameObject)Instantiate(gachaBallPrefab);
+    //probability = [65.5f, 14.5f, 10.0f, 6.0f, 4.0f] 要素の確率でその要素番号が帰ってくる
+    int DecideGachaItemNum(List<float> probabilityList){
+        float value = UnityEngine.Random.Range(0f,100f);
+        int listCount = probabilityList.Count;
+        for(int i=1;i<listCount;i++){
+            probabilityList[i] += probabilityList[i-1];
+        }
+        for(int i=0;i<listCount;i++){
+            if(value < probabilityList[i])return i;
+        }
+        return 0;
+    }
+
+    void GachaAnimation(GameObject gachaBall){
         gachaBall.transform.localScale = new Vector3(1,1,1);
         gachaBall.transform.SetParent(this.transform,false);
         gachaBall.transform.SetSiblingIndex(0); 
         gachaBall.transform.localPosition = new Vector3(15.5f,2.4f,0);
         gachaBall.GetComponent<Rigidbody2D>().AddForce(new Vector3(40,0,0));
+    }
+
+    /*
+        0:単価 +2
+        1~5:餌 +1
+    */
+    void GetGachaItem(int gachaItemNum){
+        if(gachaItemNum==0){
+            //単価アップ
+            int unit = SaveData.GetInt(SaveDataKeys.coinValue,DefaultValues.COIN_VALUE);
+            unit += 2;
+            SaveData.SetInt(SaveDataKeys.coinValue,unit);
+            SaveData.Save();
+            return;
+        }
+
+        //餌の個数アップ
+        List<int> feedCountList = SaveData.GetList<int>(SaveDataKeys.feedCount,DefaultValues.FEED_COUNT);
+        feedCountList[gachaItemNum-1]++;
+        gameManager.GetComponent<UpdateUI>().UpdateFeedCountText(feedCountList);
+        SaveData.SetList<int>(SaveDataKeys.feedCount,feedCountList);
+        SaveData.Save();
+    }
+
+    //ゲット個数の反映
+    void UpdateItemCountText(List<int> list){
+        for(int i=0;i<list.Count;i++){
+            gachaListParent.transform.GetChild(i).GetChild(4).gameObject.GetComponent<Text>().text = list[i].ToString();
+        }
     }
 
     public float GetAngle(Vector3 p1, Vector3 p2) {

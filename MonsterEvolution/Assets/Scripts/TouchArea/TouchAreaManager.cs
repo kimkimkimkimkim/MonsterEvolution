@@ -35,7 +35,6 @@ public class TouchAreaManager : MonoBehaviour
         SaveData.Save();
         gameManager.GetComponent<UpdateUI>().UpdatePossessedCoinText(possessedCoin);
 
-
         //Coin
         GameObject coin = (GameObject)Instantiate(coinPrefab);
         coin.GetComponent<Image>().raycastTarget = false;
@@ -57,7 +56,7 @@ public class TouchAreaManager : MonoBehaviour
         //Text
         GameObject text = (GameObject)Instantiate(textPrefab);
         Vector3 textPos = new Vector3(pos.x, pos.y+10,0);
-        text.GetComponent<Text>().text = "+1";
+        text.GetComponent<Text>().text = "+" + coinValue.ToString();
         text.transform.SetParent(this.transform, false);
         text.transform.localScale = new Vector3(1,1,1);
         text.transform.localPosition = textPos;

@@ -16,5 +16,6 @@ public class GameManager : MonoBehaviour
     //セーブデータの取得と反映
     void SetSaveData(){
         updateUI.UpdatePossessedCoinText(SaveData.GetInt(SaveDataKeys.possessedCoin,DefaultValues.POSSESSED_COIN));
+        updateUI.UpdateFeedCountText(SaveData.GetList<int>(SaveDataKeys.feedCount,DefaultValues.FEED_COUNT));
     }
 }
