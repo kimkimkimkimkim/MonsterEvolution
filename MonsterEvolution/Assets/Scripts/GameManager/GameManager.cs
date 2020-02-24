@@ -17,5 +17,6 @@ public class GameManager : MonoBehaviour
     void SetSaveData(){
         updateUI.UpdatePossessedCoinText(SaveData.GetInt(SaveDataKeys.possessedCoin,DefaultValues.POSSESSED_COIN));
         updateUI.UpdateFeedCountText(SaveData.GetList<int>(SaveDataKeys.feedCount,DefaultValues.FEED_COUNT));
+        updateUI.UpdateMonsterUI(SaveData.GetClass<Monster>(SaveDataKeys.monster,DefaultValues.MONSTER));
     }
 }
