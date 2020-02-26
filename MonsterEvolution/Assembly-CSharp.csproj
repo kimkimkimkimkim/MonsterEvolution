@@ -72,6 +72,7 @@
      <Compile Include="Assets\Scripts\Character\CharacterAnimation.cs" />
      <Compile Include="Assets\Scripts\Coin\CoinAppear.cs" />
      <Compile Include="Assets\Scripts\Coin\CoinManager.cs" />
+     <Compile Include="Assets\Scripts\Feed\FeedUseButton.cs" />
      <Compile Include="Assets\Scripts\Gacha\GachaManager.cs" />
      <Compile Include="Assets\Scripts\GameManager\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameManager\UpdateUI.cs" />
