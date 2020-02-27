@@ -7,6 +7,7 @@ ScriptsOnlyBuild:
     - CoinManager
     - Fade
     - FadeImage
+    - FeedButtonManager
     - GachaManager
     - GameManager
     - LotteryMachineManager
@@ -116,29 +117,31 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 9466}
     - Class: 114
-      Script: {instanceID: 9648}
+      Script: {instanceID: 9630}
     - Class: 114
-      Script: {instanceID: 9840}
+      Script: {instanceID: 9650}
     - Class: 114
-      Script: {instanceID: 9940}
+      Script: {instanceID: 9842}
     - Class: 114
-      Script: {instanceID: 9966}
+      Script: {instanceID: 9942}
     - Class: 114
-      Script: {instanceID: 9982}
+      Script: {instanceID: 9968}
     - Class: 114
-      Script: {instanceID: 10070}
+      Script: {instanceID: 9986}
     - Class: 114
-      Script: {instanceID: 10160}
+      Script: {instanceID: 10074}
     - Class: 114
-      Script: {instanceID: 10324}
+      Script: {instanceID: 10164}
     - Class: 114
-      Script: {instanceID: 10438}
+      Script: {instanceID: 10328}
     - Class: 114
-      Script: {instanceID: 10506}
+      Script: {instanceID: 10442}
     - Class: 114
-      Script: {instanceID: 10508}
+      Script: {instanceID: 10510}
     - Class: 114
-      Script: {instanceID: 12336}
+      Script: {instanceID: 10512}
+    - Class: 114
+      Script: {instanceID: 12354}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -616,6 +619,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FadeSample
+  - hash:
+      serializedVersion: 2
+      Hash: dddca2ac9a1a6fcd7f88961fde1c475e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: FeedButtonManager
   - hash:
       serializedVersion: 2
       Hash: f08a111e17bb701f9c9ec57bb78d9920
