@@ -45,13 +45,13 @@ public class FeedButtonManager : MonoBehaviour
         //エサの個数のUI反映
         gameManager.GetComponent<UpdateUI>().UpdateFeedCountText(feedCountList);
         //アニメーション
-        Animation(button,num);
+        Animation(button,num,mons);
         //経験値、ステータスのUI反映
-        gameManager.GetComponent<UpdateUI>().UpdateMonsterUI(mons);
+        //gameManager.GetComponent<UpdateUI>().UpdateMonsterUI(mons);
     }
 
-
-    private void Animation(GameObject button, int num){
+    //エサがボタンの位置からモンスターの位置まで移動するアニメーション
+    private void Animation(GameObject button, int num, Monster mons){
         //プレハブ生成
         GameObject potion = (GameObject)Instantiate(potionPrefab);
         potion.transform.SetParent(canvas.transform,false);
@@ -76,10 +76,87 @@ public class FeedButtonManager : MonoBehaviour
         potion.GetComponent<RectTransform>()
             .DOPath(path, timePotionMove, PathType.CatmullRom)
             .SetEase(Ease.OutQuad)
-            .OnComplete(() => {});
+            .OnComplete(() => {
+                //移動のアニメーションが終わったら食べるアニメーションに
+                EatAnimation(potion,mons);
+            });
         potion.GetComponent<RectTransform>()
             .DOScale(new Vector3(0.2f,0.2f,0.2f),timePotionMove);
+    }
 
+    //届いたエサを食べる時のアニメーション
+    private void EatAnimation(GameObject potion,Monster mons){
+        //モンスターのアニメーション
+        monster.GetComponent<Animator>().SetBool("isEating",true);
+
+        //ポーションのアニメーション
+        float sectionTime = 0.5f;
+        float speed = 2;
+        sectionTime /= speed;
+        int sectionNum = 18;
+        float timeAnimation = sectionTime * sectionNum;
+        Vector3 iniPos = potion.transform.localPosition;
+        //ジャンプ
+        
+        potion.transform
+            .DOLocalJump(
+                iniPos,           // 移動終了地点
+                2,               // ジャンプする力
+                9,               // ジャンプする回数
+                timeAnimation    // アニメーション時間
+            ).SetEase(Ease.Linear);
+            
+        //角度
+        potion.transform
+            .DORotate(                      /* まず一回左に回転 */
+                new Vector3(0f, 0f, 10f),   // 終了時点のRotation
+                sectionTime * 2)                // アニメーション時間
+            .SetEase(Ease.InOutSine)
+        .OnComplete(() => {
+        potion.transform
+            .DORotate(                      /* そこから右行って左を片道7回やる */
+                new Vector3(0f,0f,-10f),
+                sectionTime * 2)
+            .SetEase(Ease.InOutSine)
+            .SetLoops(
+                7, 
+                LoopType.Yoyo)
+        .OnComplete(() => {
+        potion.transform
+            .DORotate(                     /* 最後に正面に回転 */
+                new Vector3(0f, 0f, 0f),   // 終了時点のRotation
+                sectionTime * 2
+            ) 
+            .SetEase(Ease.InOutSine)
+            .OnComplete(() => {
+                //飲み込んで消えるアニメーション
+                SwallowAniimation(potion,mons);
+            });    
+        });
+        });
+
+
+    }
+
+    //エサを食べて消えていく時のアニメーション
+    private void SwallowAniimation(GameObject potion, Monster mons){
+        float time = 1f;
+        Vector3 iniPos = potion.transform.localPosition;
+
+        //ちょっと上にあげる
+        potion.transform.DOLocalMove(
+            new Vector3(iniPos.x, iniPos.y + 1.5f, 0),
+            time
+        );
+        //スケールを小さくしていく
+        potion.transform.DOScale(
+            new Vector3(0,0,0),
+            time
+        ).OnComplete(() => {
+            //終わったらpotionを削除して、UIを反映
+            Destroy(potion);
+            gameManager.GetComponent<UpdateUI>().UpdateMonsterUI(mons);
+        });
     }
 
 }
