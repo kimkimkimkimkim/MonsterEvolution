@@ -9,6 +9,8 @@ public class FeedButtonManager : MonoBehaviour
     //オブジェクト参照
     public GameObject potionPrefab;
     public List<Sprite> potionSpriteList;
+    public GameObject effect;
+
 
     //変数宣言
     private GameObject canvas;
@@ -140,6 +142,9 @@ public class FeedButtonManager : MonoBehaviour
 
     //エサを食べて消えていく時のアニメーション
     private void SwallowAniimation(GameObject potion, Monster mons){
+        //モンスターのアニメーション終了
+        monster.GetComponent<Animator>().SetBool("isEating",false);
+
         float time = 1f;
         Vector3 iniPos = potion.transform.localPosition;
 
@@ -155,8 +160,19 @@ public class FeedButtonManager : MonoBehaviour
         ).OnComplete(() => {
             //終わったらpotionを削除して、UIを反映
             Destroy(potion);
-            gameManager.GetComponent<UpdateUI>().UpdateMonsterUI(mons);
+            StatusUpAnimation(mons);
         });
+    }
+
+    //エサを食べ終えてステータスがアップするアニメーション
+    private void StatusUpAnimation(Monster mons){
+        //UI反映
+        //ステータスアップのエフェクト
+        
+        gameManager.GetComponent<UpdateUI>().UpdateMonsterUI(mons);
+
+        //エフェクト再生
+        effect.GetComponent<ParticleSystem>().Play();
     }
 
 }
