@@ -10,6 +10,8 @@ public class FeedButtonManager : MonoBehaviour
     public GameObject potionPrefab;
     public List<Sprite> potionSpriteList;
     public GameObject effect;
+    public GameObject header;
+    public GameObject gachaButton;
 
 
     //変数宣言
@@ -17,6 +19,8 @@ public class FeedButtonManager : MonoBehaviour
     private GameObject gameManager;
     private GameObject monster;
     private float timePotionMove = 0.5f;
+    private bool canPush = true; //エサボタンを押していいかどうか
+
 
     void Start(){
         canvas = GameObject.Find("Canvas");
@@ -24,15 +28,38 @@ public class FeedButtonManager : MonoBehaviour
         monster = GameObject.Find("Canvas/Char");
     }
 
+    private void MoveUI(bool doHide){
+        float k = doHide?1:-1;
+        float time = 1f;
+        float offset = 100;
+        //上にいくやつ
+        header.transform.DOLocalMove(
+            new Vector3(0,offset * k,0),
+            time
+        ).SetRelative();
+        gachaButton.transform.DOLocalMove(
+            new Vector3(0,offset * k,0),
+            time
+        ).SetRelative();
+
+        //下にいくやつ
+        this.transform.DOLocalMove(
+            new Vector3(0,-offset * k,0),
+            time
+        ).SetRelative();
+    }
+
     public void OnClick(GameObject button){
         int num = button.transform.parent.GetSiblingIndex();
-        Debug.Log(num);
         List<int> feedCountList = SaveData.GetList<int>(SaveDataKeys.feedCount,DefaultValues.FEED_COUNT);
         int feedCount = feedCountList[num];
-        if(feedCount==0){
+        if(feedCount==0 || !canPush){
             //餌が0個
             return;
         }
+        canPush = false;
+        //UIを隠す
+        MoveUI(true);
         //餌を1個消費
         feedCountList[num]--;
         //ステータスと経験値アップ
@@ -173,6 +200,9 @@ public class FeedButtonManager : MonoBehaviour
 
         //エフェクト再生
         effect.GetComponent<ParticleSystem>().Play();
+
+        canPush = true;
+        MoveUI(false);
     }
 
 }
