@@ -76,7 +76,13 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 61
       Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
     - Class: 81
+      Script: {instanceID: 0}
+    - Class: 91
+      Script: {instanceID: 0}
+    - Class: 95
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
@@ -141,12 +147,16 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10512}
     - Class: 114
-      Script: {instanceID: 12354}
+      Script: {instanceID: 12358}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
       Script: {instanceID: 0}
     - Class: 157
+      Script: {instanceID: 0}
+    - Class: 198
+      Script: {instanceID: 0}
+    - Class: 199
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
@@ -621,7 +631,7 @@ ScriptsOnlyBuild:
     className: FadeSample
   - hash:
       serializedVersion: 2
-      Hash: dddca2ac9a1a6fcd7f88961fde1c475e
+      Hash: 8517d472171cd297acfbc979e6b6519b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FeedButtonManager

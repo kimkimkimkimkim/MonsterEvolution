@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
 
 public class FeedButtonManager : MonoBehaviour
 {
@@ -21,32 +22,16 @@ public class FeedButtonManager : MonoBehaviour
     private float timePotionMove = 0.5f;
     private bool canPush = true; //エサボタンを押していいかどうか
 
+    //アニメーションなどで使用する変数
+    private Monster mons = null;
+    private GameObject buttonObj = null;
+    private int potionNum = -1;
+
 
     void Start(){
         canvas = GameObject.Find("Canvas");
         gameManager = GameObject.Find("GameManager");
         monster = GameObject.Find("Canvas/Char");
-    }
-
-    private void MoveUI(bool doHide){
-        float k = doHide?1:-1;
-        float time = 1f;
-        float offset = 100;
-        //上にいくやつ
-        header.transform.DOLocalMove(
-            new Vector3(0,offset * k,0),
-            time
-        ).SetRelative();
-        gachaButton.transform.DOLocalMove(
-            new Vector3(0,offset * k,0),
-            time
-        ).SetRelative();
-
-        //下にいくやつ
-        this.transform.DOLocalMove(
-            new Vector3(0,-offset * k,0),
-            time
-        ).SetRelative();
     }
 
     public void OnClick(GameObject button){
@@ -57,13 +42,12 @@ public class FeedButtonManager : MonoBehaviour
             //餌が0個
             return;
         }
+
         canPush = false;
-        //UIを隠す
-        MoveUI(true);
         //餌を1個消費
         feedCountList[num]--;
         //ステータスと経験値アップ
-        Monster mons = SaveData.GetClass<Monster>(SaveDataKeys.monster,DefaultValues.MONSTER);
+        mons = SaveData.GetClass<Monster>(SaveDataKeys.monster,DefaultValues.MONSTER);
         mons.statusList[num] += 1;
         mons.exp += 1;
         //データ保存
@@ -73,20 +57,59 @@ public class FeedButtonManager : MonoBehaviour
         //UI反映とアニメーション
         //エサの個数のUI反映
         gameManager.GetComponent<UpdateUI>().UpdateFeedCountText(feedCountList);
-        //アニメーション
-        Animation(button,num,mons);
-        //経験値、ステータスのUI反映
-        //gameManager.GetComponent<UpdateUI>().UpdateMonsterUI(mons);
+
+        buttonObj = button;
+        potionNum = num;
+        StartFeedAnimation();
+    }
+
+    private void MoveUI(bool doHide){
+        float k = doHide?1:-1;
+        float time = 1f;
+        float offset = 100;
+        //上にいくやつ
+        /*
+        header.transform.DOLocalMove(
+            new Vector3(0,offset * k,0),
+            time
+        ).SetRelative();
+        */
+
+        //下にいくやつ
+        gachaButton.transform.DOLocalMove(
+            new Vector3(0,-offset * k,0),
+            time
+        ).SetRelative();
+
+        this.transform.DOLocalMove(
+            new Vector3(0,-offset * k,0),
+            time
+        ).SetRelative();
+    }
+
+    //エサを与えた時のアニメーションスタート！！
+    private void StartFeedAnimation(){
+
+        //UIを隠す
+        MoveUI(true);
+
+        //0.5秒後に実行する
+        StartCoroutine(DelayMethod(0.5f, () =>
+        {
+            //アニメーション
+            FeedMoveAnimationFromButtonToChar();
+        }));
+
     }
 
     //エサがボタンの位置からモンスターの位置まで移動するアニメーション
-    private void Animation(GameObject button, int num, Monster mons){
+    private void FeedMoveAnimationFromButtonToChar(){
         //プレハブ生成
         GameObject potion = (GameObject)Instantiate(potionPrefab);
         potion.transform.SetParent(canvas.transform,false);
-        potion.transform.position = button.transform.parent.position;
+        potion.transform.position = buttonObj.transform.parent.position;
         potion.transform.localScale = new Vector3(0.28f,0.28f,0.28f);
-        potion.GetComponent<Image>().sprite = potionSpriteList[num];
+        potion.GetComponent<Image>().sprite = potionSpriteList[potionNum];
         //軌跡
         float ratio = 0.5f; //s -ratio-> m -(1-ratio)-> e
         float yOffset = 1f;
@@ -107,14 +130,14 @@ public class FeedButtonManager : MonoBehaviour
             .SetEase(Ease.OutQuad)
             .OnComplete(() => {
                 //移動のアニメーションが終わったら食べるアニメーションに
-                EatAnimation(potion,mons);
+                EatAnimation(potion);
             });
         potion.GetComponent<RectTransform>()
             .DOScale(new Vector3(0.2f,0.2f,0.2f),timePotionMove);
     }
 
     //届いたエサを食べる時のアニメーション
-    private void EatAnimation(GameObject potion,Monster mons){
+    private void EatAnimation(GameObject potion){
         //モンスターのアニメーション
         monster.GetComponent<Animator>().SetBool("isEating",true);
 
@@ -159,7 +182,7 @@ public class FeedButtonManager : MonoBehaviour
             .SetEase(Ease.InOutSine)
             .OnComplete(() => {
                 //飲み込んで消えるアニメーション
-                SwallowAniimation(potion,mons);
+                SwallowAniimation(potion);
             });    
         });
         });
@@ -168,7 +191,7 @@ public class FeedButtonManager : MonoBehaviour
     }
 
     //エサを食べて消えていく時のアニメーション
-    private void SwallowAniimation(GameObject potion, Monster mons){
+    private void SwallowAniimation(GameObject potion){
         //モンスターのアニメーション終了
         monster.GetComponent<Animator>().SetBool("isEating",false);
 
@@ -187,22 +210,62 @@ public class FeedButtonManager : MonoBehaviour
         ).OnComplete(() => {
             //終わったらpotionを削除して、UIを反映
             Destroy(potion);
-            StatusUpAnimation(mons);
+            StatusUpAnimation();
         });
     }
 
     //エサを食べ終えてステータスがアップするアニメーション
-    private void StatusUpAnimation(Monster mons){
+    private void StatusUpAnimation(){
         //UI反映
         //ステータスアップのエフェクト
-        
+        StatusUpTextAnimation();
         gameManager.GetComponent<UpdateUI>().UpdateMonsterUI(mons);
 
         //エフェクト再生
         effect.GetComponent<ParticleSystem>().Play();
 
-        canPush = true;
-        MoveUI(false);
+    }
+
+    //ステータスアップのテキストアニメーション
+    private void StatusUpTextAnimation(){
+        GameObject statusParent = header.transform.GetChild(3).gameObject;
+        GameObject status = statusParent.transform.GetChild(potionNum).gameObject;
+        GameObject statusUpText = status.transform.GetChild(3).gameObject;
+        Vector3 iniPos = statusUpText.transform.localPosition;
+
+        float offsetX = 10;
+        statusUpText.transform.localPosition = new Vector3(iniPos.x + offsetX, iniPos.y, 0);
+        statusUpText.SetActive(true);
+        statusUpText.transform.DOLocalMove(iniPos,0.5f);
+
+
+        StartCoroutine(DelayMethod(0.5f, () =>
+        {
+            mons = null;
+            buttonObj = null;
+            potionNum = -1;
+
+            canPush = true;
+            MoveUI(false);
+
+            StartCoroutine(DelayMethod(2f, () => {
+                statusUpText.SetActive(false);
+            }));
+
+        }));
+
+    }
+
+    /// <summary>
+    /// 渡された処理を指定時間後に実行する
+    /// </summary>
+    /// <param name="waitTime">遅延時間[ミリ秒]</param>
+    /// <param name="action">実行したい処理</param>
+    /// <returns></returns>
+    private IEnumerator DelayMethod(float waitTime, Action action)
+    {
+        yield return new WaitForSeconds(waitTime);
+        action();
     }
 
 }
